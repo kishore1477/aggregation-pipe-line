@@ -1,11 +1,12 @@
 import express from 'express'
 import mongoose from 'mongoose';
+import dotenv from 'dotenv'
 const { Schema } = mongoose;
 const app = express()
 app.use(express.json());
+dotenv.config()
 const port = 3000
-const DATABASE_URL = 'mongodb+srv://personal:personal@cluster0.jbfhiuh.mongodb.net/?retryWrites=true&w=majority'
-// mongoose.connect('mongodb://localhost:27017/test');
+
 
 // Connect mongoDb 
  const connectDb = async(DataBaseUrl)=>{
@@ -19,7 +20,7 @@ const DATABASE_URL = 'mongodb+srv://personal:personal@cluster0.jbfhiuh.mongodb.n
         console.log(error)
     }
 }
-connectDb(DATABASE_URL).then(()=>{
+connectDb(process.env.DATABASE_URL).then(()=>{
     console.log("connected Successfully")
 })
 // Create a model 
