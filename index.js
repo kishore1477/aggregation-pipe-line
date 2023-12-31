@@ -73,7 +73,9 @@ app.get('/aggregateData', async (req, res) => {
             //  { $group: { _id: "$student_id", total: { $sum: "$course_fee" } } }
             { $match: { section: "A" } },
     { $group: { _id: "$student_id", section: { $first: "$section" }, total: { $sum: "$course_fee" } } },
-    { $project: { _id: 0, student_id: "$_id", section: 1, total: 1 } }
+    { $project: { _id: 0, student_id: "$_id", section: 1, total: 1 } },
+    {$sort : {total:-1}}
+    //  1=>  ascending order   and  -1  => descending order
          ]);
  
          console.log("data", data);
